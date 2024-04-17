@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://drh2otgqnqmrc"]
+
+[ext_resource type="Script" path="res://Scripts/ForgeScene.gd" id="1_re3g5"]
+[ext_resource type="Texture2D" uid="uid://cuwv2prpno44h" path="res://Resources/white-square.png" id="2_ameg3"]
+[ext_resource type="Texture2D" uid="uid://bo46a6qq4lig6" path="res://Resources/hammer.png" id="3_1vjmq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o677c"]
+size = Vector2(8, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwg5f"]
+size = Vector2(6, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvvvq"]
+size = Vector2(5, 20)
+
+[node name="Forge" type="Node2D"]
+script = ExtResource("1_re3g5")
+
+[node name="Anvil" type="Sprite2D" parent="."]
+modulate = Color(0.184314, 0.184314, 0.184314, 1)
+position = Vector2(160, 88)
+scale = Vector2(1.5, 0.59375)
+texture = ExtResource("2_ameg3")
+
+[node name="SwingContainer" type="Node2D" parent="."]
+position = Vector2(160, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="SwingContainer"]
+modulate = Color(0.172549, 0.262745, 0.92549, 1)
+position = Vector2(7.62939e-06, 0)
+scale = Vector2(4, 0.25)
+texture = ExtResource("2_ameg3")
+
+[node name="SwingArea" type="Node2D" parent="."]
+position = Vector2(116, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="SwingArea"]
+modulate = Color(0.121569, 0.282353, 0.529412, 1)
+scale = Vector2(0.25, 0.5)
+texture = ExtResource("2_ameg3")
+
+[node name="Perfect" type="Area2D" parent="SwingArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Perfect"]
+shape = SubResource("RectangleShape2D_o677c")
+
+[node name="Early" type="Area2D" parent="SwingArea"]
+position = Vector2(7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Early"]
+shape = SubResource("RectangleShape2D_uwg5f")
+
+[node name="Late" type="Area2D" parent="SwingArea"]
+position = Vector2(-7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Late"]
+shape = SubResource("RectangleShape2D_uwg5f")
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+position = Vector2(94, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
+shape = SubResource("RectangleShape2D_yvvvq")
+
+[node name="StartingPosition" type="Marker2D" parent="."]
+position = Vector2(224, 120)
+
+[node name="Hammer" type="Sprite2D" parent="."]
+position = Vector2(185, 81)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_1vjmq")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 88.0
+scale = Vector2(2.016, 0.255)
+rounded = true
+texture_under = ExtResource("2_ameg3")
+texture_progress = ExtResource("2_ameg3")
+tint_under = Color(0.913735, 0.834577, 0.452931, 1)
+tint_progress = Color(0.909804, 0.623529, 0.266667, 1)
+
+[connection signal="area_entered" from="SwingArea/Perfect" to="." method="_on_perfectArea_entered"]
+[connection signal="area_entered" from="SwingArea/Early" to="." method="_on_earlyArea_entered"]
+[connection signal="area_entered" from="SwingArea/Late" to="." method="_on_lateArea_entered"]
+[connection signal="area_entered" from="OutOfBounds" to="." method="_on_outOfBounds_area_entered"]

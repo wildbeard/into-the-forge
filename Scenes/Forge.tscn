@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://drh2otgqnqmrc"]
+
+[ext_resource type="Script" path="res://Scripts/ForgeScene.gd" id="1_re3g5"]
+[ext_resource type="Resource" uid="uid://b8vrih1dfvjxf" path="res://Resources/Craftable/Dagger_Iron.tres" id="2_pu408"]
+[ext_resource type="Texture2D" uid="uid://cmx0262ytux83" path="res://Assets/anvil.png" id="3_qtxwr"]
+[ext_resource type="Texture2D" uid="uid://bo46a6qq4lig6" path="res://Assets/hammer.png" id="3_rcdlu"]
+[ext_resource type="PackedScene" uid="uid://d3jrwkbus3a86" path="res://Scenes/Spawner.tscn" id="4_qipa2"]
+[ext_resource type="Texture2D" uid="uid://cfiwtduc0jtd4" path="res://Assets/progressbar_over.png" id="5_w6nxv"]
+[ext_resource type="Texture2D" uid="uid://deg8dsawkc0a4" path="res://Assets/progressbar_progress.png" id="6_gr0my"]
+[ext_resource type="FontFile" uid="uid://yod4uopb6fe5" path="res://Assets/Fonts/runescape.ttf" id="7_3ewg1"]
+[ext_resource type="Shader" path="res://Shaders/ItemHeatShader.gdshader" id="8_7co31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o677c"]
+size = Vector2(12, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwg5f"]
+size = Vector2(6, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvvvq"]
+size = Vector2(5, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kni5e"]
+shader = ExtResource("8_7co31")
+shader_parameter/heat_color = Color(0.890196, 0.247059, 0.160784, 1)
+shader_parameter/opacity = 1.0
+
+[node name="Forge" type="Node2D"]
+script = ExtResource("1_re3g5")
+craftable = ExtResource("2_pu408")
+
+[node name="Anvil" type="Sprite2D" parent="."]
+position = Vector2(157, 87)
+scale = Vector2(2, 2)
+texture = ExtResource("3_qtxwr")
+
+[node name="SwingContainer" type="Node2D" parent="."]
+position = Vector2(160, 133)
+
+[node name="Sprite2D" type="Sprite2D" parent="SwingContainer"]
+modulate = Color(0.372549, 0.352941, 0.380392, 1)
+position = Vector2(-0.499996, 1.00001)
+scale = Vector2(7.94444, 0.999998)
+texture = ExtResource("6_gr0my")
+
+[node name="SwingArea" type="Node2D" parent="."]
+position = Vector2(116, 133)
+
+[node name="Sprite2D" type="Sprite2D" parent="SwingArea"]
+z_index = 1
+position = Vector2(-0.0909032, 0.0601848)
+rotation = 1.5708
+scale = Vector2(1.35, 2)
+texture = ExtResource("5_w6nxv")
+
+[node name="Perfect" type="Area2D" parent="SwingArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Perfect"]
+shape = SubResource("RectangleShape2D_o677c")
+
+[node name="Early" type="Area2D" parent="SwingArea"]
+position = Vector2(7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Early"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_uwg5f")
+
+[node name="Late" type="Area2D" parent="SwingArea"]
+position = Vector2(-7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea/Late"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_uwg5f")
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+position = Vector2(94, 133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_yvvvq")
+
+[node name="StartingPosition" type="Marker2D" parent="."]
+position = Vector2(224, 133)
+
+[node name="Hammer" type="Sprite2D" parent="."]
+position = Vector2(185, 81)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_rcdlu")
+
+[node name="Spawner" parent="." instance=ExtResource("4_qipa2")]
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kni5e")
+position = Vector2(160, 87)
+rotation = 1.5708
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 119.0
+offset_top = 35.0
+offset_right = 206.0
+offset_bottom = 45.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+texture_over = ExtResource("5_w6nxv")
+texture_progress = ExtResource("6_gr0my")
+
+[node name="DebugText" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_right = 136.0
+offset_bottom = 36.0
+theme_override_fonts/normal_font = ExtResource("7_3ewg1")
+theme_override_font_sizes/normal_font_size = 16
+text = "Some Test Text"
+fit_content = true
+
+[node name="ItemName" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 109.0
+offset_top = 12.0
+offset_right = 224.0
+offset_bottom = 30.0
+theme_override_fonts/normal_font = ExtResource("7_3ewg1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+
+[connection signal="area_entered" from="OutOfBounds" to="." method="_on_outOfBounds_area_entered"]
+[connection signal="spawn" from="Spawner" to="." method="_on_spawner_spawn"]

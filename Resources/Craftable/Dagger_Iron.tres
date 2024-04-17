@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CraftableItem" load_steps=4 format=3 uid="uid://b8vrih1dfvjxf"]
+
+[ext_resource type="Texture2D" uid="uid://0l8d210j71qv" path="res://Assets/dagger_iron.png" id="1_676co"]
+[ext_resource type="Resource" uid="uid://c4317c6kel584" path="res://Resources/Craftable/Dagger_Bronze.tres" id="1_g3ubc"]
+[ext_resource type="Script" path="res://Resources/CraftableItem.gd" id="1_j70cc"]
+
+[resource]
+script = ExtResource("1_j70cc")
+inherits = ExtResource("1_g3ubc")
+name = "Iron Dagger"
+description = ""
+requiredPoints = 20
+earlyPoint = 1
+perfectPoint = 2
+comboMultiplier = 0.125
+startingTexture = ExtResource("1_676co")
+finishedTexture = ExtResource("1_676co")
+difficulty = 1.25

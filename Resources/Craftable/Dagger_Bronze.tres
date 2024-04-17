@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CraftableItem" load_steps=3 format=3 uid="uid://c4317c6kel584"]
+
+[ext_resource type="Texture2D" uid="uid://bksdpgj842xxq" path="res://Assets/dagger_bronze.png" id="1_lt1em"]
+[ext_resource type="Script" path="res://Resources/CraftableItem.gd" id="2_30382"]
+
+[resource]
+script = ExtResource("2_30382")
+name = "Dagger"
+description = ""
+requiredPoints = 10
+startingTexture = ExtResource("1_lt1em")
+finishedTexture = ExtResource("1_lt1em")
+difficulty = 0.75

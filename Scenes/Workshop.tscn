@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgcwe0uki8pq6"]
+
+[ext_resource type="Texture2D" uid="uid://cuwv2prpno44h" path="res://Assets/white-square.png" id="1_lxkkp"]
+
+[node name="Workshop" type="Node2D"]
+
+[node name="Floor" type="Sprite2D" parent="."]
+modulate = Color(0.34902, 0.168627, 0, 1)
+position = Vector2(575.813, 325.65)
+scale = Vector2(36.0117, 20.4391)
+texture = ExtResource("1_lxkkp")
