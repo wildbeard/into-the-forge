@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://drh2otgqnqmrc"]
+[gd_scene load_steps=15 format=3 uid="uid://drh2otgqnqmrc"]
 
 [ext_resource type="Script" path="res://Scripts/ForgeScene.gd" id="1_re3g5"]
 [ext_resource type="Resource" uid="uid://b8vrih1dfvjxf" path="res://Resources/Craftable/Dagger_Iron.tres" id="2_pu408"]
 [ext_resource type="Texture2D" uid="uid://cmx0262ytux83" path="res://Assets/anvil.png" id="3_qtxwr"]
 [ext_resource type="Texture2D" uid="uid://bo46a6qq4lig6" path="res://Assets/hammer.png" id="3_rcdlu"]
 [ext_resource type="PackedScene" uid="uid://d3jrwkbus3a86" path="res://Scenes/Spawner.tscn" id="4_qipa2"]
+[ext_resource type="Texture2D" uid="uid://cw0tjf5s1q0ks" path="res://Assets/test-bar.png" id="4_toyu5"]
 [ext_resource type="Texture2D" uid="uid://cfiwtduc0jtd4" path="res://Assets/progressbar_over.png" id="5_w6nxv"]
 [ext_resource type="Texture2D" uid="uid://deg8dsawkc0a4" path="res://Assets/progressbar_progress.png" id="6_gr0my"]
 [ext_resource type="FontFile" uid="uid://yod4uopb6fe5" path="res://Assets/Fonts/runescape.ttf" id="7_3ewg1"]
@@ -37,10 +38,9 @@ texture = ExtResource("3_qtxwr")
 position = Vector2(160, 133)
 
 [node name="Sprite2D" type="Sprite2D" parent="SwingContainer"]
-modulate = Color(0.372549, 0.352941, 0.380392, 1)
-position = Vector2(-0.499996, 1.00001)
-scale = Vector2(7.94444, 0.999998)
-texture = ExtResource("6_gr0my")
+position = Vector2(-0.499994, 0)
+scale = Vector2(32.75, 0.0625)
+texture = ExtResource("4_toyu5")
 
 [node name="SwingArea" type="Node2D" parent="."]
 position = Vector2(116, 133)
@@ -82,8 +82,7 @@ shape = SubResource("RectangleShape2D_yvvvq")
 position = Vector2(224, 133)
 
 [node name="Hammer" type="Sprite2D" parent="."]
-position = Vector2(185, 81)
-scale = Vector2(0.75, 0.75)
+position = Vector2(185, 80)
 texture = ExtResource("3_rcdlu")
 
 [node name="Spawner" parent="." instance=ExtResource("4_qipa2")]
@@ -92,6 +91,7 @@ texture = ExtResource("3_rcdlu")
 material = SubResource("ShaderMaterial_kni5e")
 position = Vector2(160, 87)
 rotation = 1.5708
+scale = Vector2(-1, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

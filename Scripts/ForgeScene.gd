@@ -26,6 +26,8 @@ func _ready():
 	
 	# If we immediately start and spawn the markerScene var isn't
 	# yet available in _on_spawner_spawn()
+	$Spawner.min = 0.5
+	$Spawner.max = 0.85
 	$Spawner/Timer.start(0.5)
 
 func _process(_delta):
