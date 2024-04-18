@@ -1,5 +1,7 @@
 extends Node2D
 
+signal switch_scene(scene: Node)
+
 @export var craftable: CraftableItem = null
 
 @onready var outOfBounds: Area2D = $OutOfBounds
