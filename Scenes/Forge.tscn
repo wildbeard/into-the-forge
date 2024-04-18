@@ -38,8 +38,8 @@ texture = ExtResource("3_qtxwr")
 position = Vector2(160, 133)
 
 [node name="Sprite2D" type="Sprite2D" parent="SwingContainer"]
-position = Vector2(-0.499994, 0)
-scale = Vector2(32.75, 0.0625)
+position = Vector2(-0.999995, 0)
+scale = Vector2(32.5, 0.1875)
 texture = ExtResource("4_toyu5")
 
 [node name="SwingArea" type="Node2D" parent="."]
@@ -118,9 +118,9 @@ text = "Some Test Text"
 fit_content = true
 
 [node name="ItemName" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 109.0
+offset_left = 105.0
 offset_top = 12.0
-offset_right = 224.0
+offset_right = 220.0
 offset_bottom = 30.0
 theme_override_fonts/normal_font = ExtResource("7_3ewg1")
 theme_override_font_sizes/normal_font_size = 16

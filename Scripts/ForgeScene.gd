@@ -8,6 +8,7 @@ extends Node2D
 @onready var progressBar: TextureProgressBar = $CanvasLayer/ProgressBar
 @onready var itemLabel: RichTextLabel = $CanvasLayer/ItemName
 @onready var markerScene: PackedScene = preload("res://Scenes/SwingMarker.tscn")
+@onready var floatingTextScene: PackedScene = preload("res://Scenes/FloatingText.tscn")
 
 var currentMarkerCount: int = 0
 var perfectHits: int = 0
@@ -48,24 +49,34 @@ func _process(_delta):
 		if m && m.hitType > -1:
 			self._removeMarkerFromScene(m)
 			var point = 0
+			var hitText = null
 
 			match m.hitType:
 				0:
 					combo = 0
 					point = craftable.earlyPoint
 					early += craftable.earlyPoint
+					hitText = "Early"
 				1:
 					perfectHits += 1
 					point = craftable.perfectPoint + floor((currentPoints * combo * craftable.comboMultiplier))
 					combo += 1
+					hitText = "Perfect"
 				2:
 					combo = 0
 					late += 1
+					hitText = "Late"
 					
 			if point + currentPoints > craftable.requiredPoints:
 				currentPoints = craftable.requiredPoints
 			else:
 				currentPoints += point
+			
+			var s: Sprite2D = m.get_node("Sprite2D")
+			var p: Vector2 = m.global_position
+			p.y -= s.get_rect().size.x * s.scale.x
+			p.x -= 15
+			self._addHitText(hitText, p)
 		else:
 			self._removeMarkerFromScene(m)
 
@@ -93,6 +104,19 @@ func _animateHammer() -> void:
 	var start = hammer.rotation_degrees
 	t.tween_property(hammer, "rotation", deg_to_rad(start - 90), 0.15)
 	t.tween_property(hammer, "rotation", deg_to_rad(start), 0.25)
+
+func _addHitText(text: String, pos: Vector2) -> void:
+	var t = create_tween().set_parallel(true)
+	var txt = floatingTextScene.instantiate()
+	var label = txt.get_node("Label")
+	label.text = text
+	label.global_position = pos
+	add_child(txt)
+	t.tween_property(label, "position", Vector2(pos.x - randf_range(-25, 25), pos.y - 25), 0.5)
+	t.tween_property(label, "rotation", deg_to_rad(randf_range(-25, 25)), 0.5)
+	t.tween_property(label, "modulate", Color("#FFF", 0), 0.5)
+	t.tween_property(label, "scale", Vector2(0.75, 0.75), 0.5)
+	t.chain().tween_callback(txt.queue_free)
 
 func _setHitTypeOnNode(marker: Node):
 	if !marker:
