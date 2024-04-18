@@ -5,9 +5,12 @@
 
 [resource]
 script = ExtResource("2_30382")
-name = "Dagger"
+name = "Bronze Dagger"
 description = ""
 requiredPoints = 10
+earlyPoint = 1
+perfectPoint = 2
+comboMultiplier = 0.125
 startingTexture = ExtResource("1_lt1em")
 finishedTexture = ExtResource("1_lt1em")
 difficulty = 0.75
