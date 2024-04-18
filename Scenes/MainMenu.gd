@@ -21,8 +21,8 @@ func _ready() -> void:
 func _on_item_list_item_selected(index: int) -> void:
 	# Since we're indexing resources via CraftableItem.name we can
 	# hackishly use get_item_text(index) to get the key
-	var name = %ItemList.get_item_text(index)
-	var res = files[name]
+	var itemName = %ItemList.get_item_text(index)
+	var res = files[itemName]
 	
 	if !res:
 		return
