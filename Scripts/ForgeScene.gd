@@ -69,9 +69,6 @@ func _process(_delta):
 
 	self._updateProgressBar()
 	self._updateSpriteHeat()
-
-func _addMarkerToScene(m: Node):
-	add_child(m)
 	
 func _removeMarkerFromScene(marker: Node):
 	if !marker:
@@ -128,5 +125,6 @@ func _on_spawner_spawn():
 	var marker = markerScene.instantiate()
 	marker.global_position = $StartingPosition.global_position
 	marker.targetPosition = outOfBounds.global_position
+	marker.difficulty = craftable.difficulty
 	markers.push_back(marker)
 	add_child(marker)
