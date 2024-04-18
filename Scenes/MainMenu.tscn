@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c75gyp4ocmr8g"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_vr64t"]
+[ext_resource type="FontFile" uid="uid://yod4uopb6fe5" path="res://Assets/Fonts/runescape.ttf" id="2_u30gt"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_vr64t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 44.0
+offset_top = 33.0
+offset_right = 146.0
+offset_bottom = 157.0
+theme_override_fonts/font = ExtResource("2_u30gt")
+theme_override_font_sizes/font_size = 16
+
+[connection signal="item_selected" from="CanvasLayer/ItemList" to="." method="_on_item_list_item_selected"]
