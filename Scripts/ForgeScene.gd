@@ -15,6 +15,7 @@ signal switch_scene(scene: Node)
 var currentMarkerCount: int = 0
 var perfectHits: int = 0
 var combo: int = 0
+var maxCombo: int = 0
 var early: int = 0
 var late: int = 0
 var markers: Array = []
@@ -64,6 +65,9 @@ func _process(_delta):
 					point = craftable.perfectPoint + floor((currentPoints * combo * craftable.comboMultiplier))
 					combo += 1
 					hitText = "Perfect"
+					
+					if combo > maxCombo:
+						maxCombo = combo
 				2:
 					combo = 0
 					late += 1
