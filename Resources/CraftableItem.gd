@@ -29,10 +29,10 @@ func _hasInheritable() -> bool:
 	
 func _get(property):
 	var val = self[property]
+
 	if CAN_INHERIT.has(property) && _hasInheritable() && !!val:
 		val = inherits[property]
-	
-	print(val)
+
 	return val
 
 func getDescription() -> String:
