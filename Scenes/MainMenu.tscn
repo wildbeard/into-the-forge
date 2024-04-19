@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c75gyp4ocmr8g"]
+[gd_scene load_steps=4 format=3 uid="uid://c75gyp4ocmr8g"]
 
 [ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_vr64t"]
+[ext_resource type="FontFile" uid="uid://bi3mwlj8ge4kw" path="res://Assets/Fonts/dogicapixel.ttf" id="2_qkplq"]
 [ext_resource type="FontFile" uid="uid://yod4uopb6fe5" path="res://Assets/Fonts/runescape.ttf" id="2_u30gt"]
 
 [node name="Node2D" type="Node2D"]
@@ -10,11 +11,27 @@ script = ExtResource("1_vr64t")
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 44.0
-offset_top = 33.0
-offset_right = 146.0
-offset_bottom = 157.0
+offset_left = 6.0
+offset_top = 49.0
+offset_right = 136.0
+offset_bottom = 173.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qkplq")
+theme_override_font_sizes/font_size = 8
+allow_search = false
+icon_scale = 0.35
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 290.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.890196, 0.247059, 0.160784, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_u30gt")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 32
+text = "Forge"
+horizontal_alignment = 1
 
 [connection signal="item_selected" from="CanvasLayer/ItemList" to="." method="_on_item_list_item_selected"]
