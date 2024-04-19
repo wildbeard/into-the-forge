@@ -11,6 +11,7 @@ signal switch_scene(scene: Node)
 @onready var itemLabel: RichTextLabel = $CanvasLayer/ItemName
 @onready var markerScene: PackedScene = preload("res://Scenes/SwingMarker.tscn")
 @onready var floatingTextScene: PackedScene = preload("res://Scenes/FloatingText.tscn")
+@onready var statsScene: PackedScene = preload("res://Scenes/StatsPopup.tscn")
 
 var currentMarkerCount: int = 0
 var perfectHits: int = 0
@@ -20,6 +21,8 @@ var early: int = 0
 var late: int = 0
 var markers: Array = []
 var currentPoints: int = 0
+var statsAdded: bool = false
+var statsWindow: Node = null
 
 func _ready():
 	progressBar.min_value = 0
@@ -41,6 +44,21 @@ func _process(_delta):
 
 		for m in markers:
 			self._removeMarkerFromScene(m)
+
+		if !statsAdded:
+			statsWindow = statsScene.instantiate()
+			statsWindow.craftable = craftable
+			statsWindow.stats = {
+				"late": late,
+				"perfect": perfectHits,
+				"early": early,
+				"max_combo": maxCombo
+			}
+			statsWindow.z_index = 2
+			statsWindow.connect("button_pressed", _on_statsWindow_button_pressed)
+			add_child(statsWindow)
+			statsAdded = true
+		
 		return
 	
 	if Input.is_action_just_pressed("spacebar"):
@@ -147,6 +165,19 @@ func _setHitTypeOnNode(marker: Node):
 	
 	marker.hitType = hitType
 
+func _retry() -> void:
+	statsWindow.queue_free()
+	statsAdded = false
+	currentPoints = 0
+	early = 0
+	late = 0
+	perfectHits = 0
+	combo = 0
+	
+	$Spawner.minDelay = 0.5
+	$Spawner.maxDelay = 0.85
+	$Spawner/Timer.start(0.5)
+
 func _on_outOfBounds_area_entered(area: Area2D):
 	self._removeMarkerFromScene(area.owner)
 
@@ -160,3 +191,9 @@ func _on_spawner_spawn():
 	marker.difficulty = craftable.difficulty
 	markers.push_back(marker)
 	add_child(marker)
+
+func _on_statsWindow_button_pressed(btn: String) -> void:
+	if btn == "menu":
+		emit_signal("switch_scene", load("res://Scenes/MainMenu.tscn").instantiate())
+	else:
+		_retry()

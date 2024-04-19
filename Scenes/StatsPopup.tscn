@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dusagk4meb6vb"]
+
+[ext_resource type="Script" path="res://Scenes/StatsPopup.gd" id="1_p7bdc"]
+[ext_resource type="FontFile" uid="uid://yod4uopb6fe5" path="res://Assets/Fonts/runescape.ttf" id="2_k862i"]
+[ext_resource type="Texture2D" uid="uid://0l8d210j71qv" path="res://Assets/dagger_iron.png" id="3_vi5fb"]
+[ext_resource type="FontFile" uid="uid://bi3mwlj8ge4kw" path="res://Assets/Fonts/dogicapixel.ttf" id="4_jhiw1"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_p7bdc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ItemName" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 128.0
+offset_top = 48.0
+offset_right = 219.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_k862i")
+text = "Iron Dagger"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(120, 56)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_vi5fb")
+
+[node name="StatsRichLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 80.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 136.0
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("4_jhiw1")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+
+[node name="MenuBtn" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 104.0
+offset_top = 144.0
+offset_right = 152.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("4_jhiw1")
+theme_override_font_sizes/font_size = 8
+text = "Menu"
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 168.0
+offset_top = 144.0
+offset_right = 216.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("4_jhiw1")
+theme_override_font_sizes/font_size = 8
+text = "Retry"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 40.0
+offset_right = 256.0
+offset_bottom = 168.0
+color = Color(0, 0, 0, 0.568627)
