@@ -45,11 +45,25 @@ texture = ExtResource("4_toyu5")
 [node name="SwingArea" type="Node2D" parent="."]
 position = Vector2(116, 133)
 
-[node name="Sprite2D" type="Sprite2D" parent="SwingArea"]
+[node name="NinePatchRect" type="NinePatchRect" parent="SwingArea"]
 z_index = 1
-position = Vector2(-0.0909032, 0.0601848)
+offset_left = 7.0
+offset_top = -11.0
+offset_right = 29.0
+offset_bottom = 3.0
 rotation = 1.5708
-scale = Vector2(1.35, 2)
+texture = ExtResource("5_w6nxv")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="SwingArea"]
+visible = false
+z_index = 1
+position = Vector2(1.05945, 0.060189)
+rotation = 1.5708
+scale = Vector2(1.35, 4.81688)
 texture = ExtResource("5_w6nxv")
 
 [node name="Perfect" type="Area2D" parent="SwingArea"]
