@@ -8,14 +8,19 @@ var files: Dictionary
 func _ready() -> void:
 	var path = "res://Resources/Craftable/"
 	var dir = DirAccess.open(path)
-	
+
 	dir.list_dir_begin()
 	var fileName = dir.get_next()
+	fileName = fileName.trim_suffix(".remap")
 	
 	while fileName != "":
-		var r = ResourceLoader.load("%s%s" % [path,fileName], "CraftableItem")
+		var filePath := "%s%s" % [path,fileName]
+		var r = ResourceLoader.load(filePath, "CraftableItem")
+
 		files[r.name] = r
 		fileName = dir.get_next()
+		fileName = fileName.trim_suffix(".remap")
+
 		%ItemList.add_item(r.name, r.finishedTexture)
 
 func _on_item_list_item_selected(index: int) -> void:
