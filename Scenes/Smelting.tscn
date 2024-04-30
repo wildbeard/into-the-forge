@@ -1,47 +1,106 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfopukkmamw4t"]
+[gd_scene load_steps=13 format=3 uid="uid://bfopukkmamw4t"]
 
 [ext_resource type="Texture2D" uid="uid://cuwv2prpno44h" path="res://Assets/white-square.png" id="1_cx617"]
 [ext_resource type="Script" path="res://Scenes/Smelting.gd" id="1_ic55g"]
+[ext_resource type="Script" path="res://Scenes/Heat.gd" id="3_pmrx1"]
+[ext_resource type="Script" path="res://Scenes/Smelting/SweetSpot.gd" id="4_8j2yr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kn5ao"]
-size = Vector2(32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75wiy"]
+size = Vector2(30.5714, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmb4j"]
-size = Vector2(32, 32.2)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brmcd"]
+size = Vector2(30.5714, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w06ov"]
+size = Vector2(14, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3x8w"]
+size = Vector2(14, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h45q2"]
+size = Vector2(20, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dawu"]
+size = Vector2(20, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bhsl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muqqt"]
+bg_color = Color(0.964706, 0.396078, 0.196078, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ic55g")
 
-[node name="HeatBar" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-modulate = Color(0.847059, 0.282353, 0.0666667, 1)
+[node name="HeatBarBG" type="Sprite2D" parent="."]
+modulate = Color(0.584314, 0.180392, 0.0235294, 1)
 scale = Vector2(0.4375, 2.5)
 texture = ExtResource("1_cx617")
 centered = false
 
-[node name="HeatSweetSpot" type="Sprite2D" parent="."]
+[node name="Heat" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(1, 0.298039, 0.25098, 1)
 position = Vector2(0, 22)
 scale = Vector2(0.4375, 1)
+collision_layer = 0
+script = ExtResource("3_pmrx1")
+
+[node name="HeatSweetSpot" type="Sprite2D" parent="Heat"]
+modulate = Color(1, 0.266667, 0.121569, 1)
 texture = ExtResource("1_cx617")
 centered = false
 
-[node name="Area2D" type="Area2D" parent="HeatSweetSpot"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heat"]
+position = Vector2(16.7143, 16)
+shape = SubResource("RectangleShape2D_75wiy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeatSweetSpot/Area2D"]
-position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_kn5ao")
+[node name="Area2D" type="Area2D" parent="Heat"]
 
-[node name="YourBar" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heat/Area2D"]
+position = Vector2(16.7143, 16)
+shape = SubResource("RectangleShape2D_brmcd")
+
+[node name="SweetSpot" type="CharacterBody2D" parent="."]
+position = Vector2(0, 37)
+collision_layer = 0
+script = ExtResource("4_8j2yr")
+
+[node name="Sprite2D" type="Sprite2D" parent="SweetSpot"]
+position = Vector2(7, 3.00001)
+scale = Vector2(0.4375, 0.21875)
+texture = ExtResource("1_cx617")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SweetSpot"]
+position = Vector2(7, 3)
+shape = SubResource("RectangleShape2D_w06ov")
+
+[node name="Area2D" type="Area2D" parent="SweetSpot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SweetSpot/Area2D"]
+position = Vector2(7, 3.5)
+shape = SubResource("RectangleShape2D_c3x8w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, 82)
+shape = SubResource("RectangleShape2D_h45q2")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(7, -1.5)
+shape = SubResource("RectangleShape2D_5dawu")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, 34)
-scale = Vector2(0.4375, 0.15625)
-texture = ExtResource("1_cx617")
-centered = false
-
-[node name="Area2D" type="Area2D" parent="YourBar"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YourBar/Area2D"]
-position = Vector2(16, 15.9)
-shape = SubResource("RectangleShape2D_lmb4j")
+offset_left = 22.0
+offset_top = 80.0
+offset_right = 102.0
+offset_bottom = 85.0
+rotation = -1.5708
+theme_override_styles/background = SubResource("StyleBoxFlat_3bhsl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_muqqt")
+step = 0.1
+show_percentage = false
