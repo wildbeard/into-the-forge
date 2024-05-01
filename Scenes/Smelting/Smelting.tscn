@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://5p32houpstwh"]
+
+[ext_resource type="PackedScene" uid="uid://bfopukkmamw4t" path="res://Scenes/Smelting/HeatBars.tscn" id="1_82ca6"]
+[ext_resource type="Script" path="res://Scenes/Smelting/Smelting.gd" id="1_w2r2c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1eary"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8vr2"]
+bg_color = Color(0.964706, 0.396078, 0.196078, 1)
+
+[node name="Smelting" type="Node2D"]
+script = ExtResource("1_w2r2c")
+
+[node name="HeatBars" parent="." instance=ExtResource("1_82ca6")]
+position = Vector2(9, 48)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 26.0
+offset_top = 128.0
+offset_right = 106.0
+offset_bottom = 133.0
+rotation = -1.5708
+theme_override_styles/background = SubResource("StyleBoxFlat_1eary")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h8vr2")
+step = 0.1
+show_percentage = false
